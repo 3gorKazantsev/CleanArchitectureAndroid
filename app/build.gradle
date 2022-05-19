@@ -34,6 +34,7 @@ android {
 
 dependencies {
     def lifecycle_version = "2.4.1"
+    def koin_version = "3.2.0"
 
     implementation project(path: ':domain')
     implementation project(path: ':data')
@@ -42,7 +43,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-
+    // Koin core
+    implementation "io.insert-koin:koin-core:$koin_version"
+    // Koin android
+    implementation "io.insert-koin:koin-android:$koin_version"
+    // Koin test
+    implementation "io.insert-koin:koin-test:$koin_version"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'

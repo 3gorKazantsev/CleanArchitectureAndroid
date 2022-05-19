@@ -16,18 +16,18 @@
         android:id="@+id/receive_Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Get data" />
+        android:text="Get user" />
 
     <EditText
         android:id="@+id/data_EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Put data here" />
+        android:hint="Put user here" />
 
     <Button
         android:id="@+id/send_Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save data" />
+        android:text="Save user" />
 </LinearLayout>

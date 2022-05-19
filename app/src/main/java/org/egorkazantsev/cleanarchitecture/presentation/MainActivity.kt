@@ -8,16 +8,22 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import org.egorkazantsev.cleanarchitecture.R
+import org.egorkazantsev.cleanarchitecture.app.App
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var viewModelFactory: MainViewModelFactory
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProvider(this, MainViewModelFactory(this))
+        (applicationContext as App).appComponent.inject(this)
+
+        viewModel = ViewModelProvider(this, viewModelFactory)
             .get(MainViewModel::class.java)
 
         val dataTextView: TextView = findViewById(R.id.data_TextView)

@@ -1,16 +1,21 @@
 package org.egorkazantsev.cleanarchitecture.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import org.egorkazantsev.cleanarchitecture.R
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel by viewModel<MainViewModel>()
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +27,6 @@ class MainActivity : AppCompatActivity() {
         val sendButton: Button = findViewById(R.id.send_Button)
 
         viewModel.resultLiveData.observe(this) {
-            dataTextView.text = it
-        }
-        viewModel.userLiveData.observe(this) {
             dataTextView.text = it
         }
 

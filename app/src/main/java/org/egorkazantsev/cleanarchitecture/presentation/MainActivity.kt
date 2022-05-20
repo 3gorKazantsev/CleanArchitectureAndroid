@@ -5,20 +5,21 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import org.egorkazantsev.cleanarchitecture.R
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        viewModel = ViewModelProvider(this, MainViewModelFactory(this))
-            .get(MainViewModel::class.java)
 
         val dataTextView: TextView = findViewById(R.id.data_TextView)
         val receiveButton: Button = findViewById(R.id.receive_Button)
@@ -26,9 +27,6 @@ class MainActivity : AppCompatActivity() {
         val sendButton: Button = findViewById(R.id.send_Button)
 
         viewModel.resultLiveData.observe(this) {
-            dataTextView.text = it
-        }
-        viewModel.userLiveData.observe(this) {
             dataTextView.text = it
         }
 

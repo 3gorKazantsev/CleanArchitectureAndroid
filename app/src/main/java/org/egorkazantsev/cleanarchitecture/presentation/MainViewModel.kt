@@ -3,22 +3,21 @@ package org.egorkazantsev.cleanarchitecture.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.egorkazantsev.cleanarchitecture.domain.model.User
 import org.egorkazantsev.cleanarchitecture.domain.model.UserParam
 import org.egorkazantsev.cleanarchitecture.domain.usecase.GetUserUseCase
 import org.egorkazantsev.cleanarchitecture.domain.usecase.SaveUserUseCase
+import javax.inject.Inject
 
-// желательно ViewModel не должна зависить от Android классов (например контекст)
-// а только содержать чистый kotlin код
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
     private val saveUserUseCase: SaveUserUseCase
 ) : ViewModel() {
 
     private val resultMutableLiveData = MutableLiveData<String>()
     val resultLiveData: LiveData<String> = resultMutableLiveData
-    private val userMutableLiveData = MutableLiveData<String>()
-    val userLiveData: LiveData<String> = userMutableLiveData
 
     fun save(text: String) {
         val param = UserParam(text)
@@ -28,6 +27,6 @@ class MainViewModel(
 
     fun receive() {
         val user: User = getUserUseCase.execute()
-        userMutableLiveData.value = "${user.firstName} ${user.lastName}"
+        resultMutableLiveData.value = "${user.firstName} ${user.lastName}"
     }
 }
